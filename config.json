@@ -11,6 +11,36 @@
             "stop":     [11971, 9000, 39, 30]
         },
         {
+            "name": "Rosewood Police Department",
+            "start": [8035, 11696, 26, 38],
+            "stop": [8082, 11761, 26, 39]
+        },
+        {
+            "name": "Westpoint Thundergas",
+            "start": [11777, 6840, 39, 22],
+            "stop": [11842, 6894, 39, 22]
+        },
+        {
+            "name": "Riverside PD",
+            "start": [6050, 5239, 20, 17],
+            "stop": [6108, 5333, 20, 17]
+        },
+        {
+            "name": "Westpoint Gunshop",
+            "start": [12046, 6748, 40, 22],
+            "stop": [12087, 6822, 40, 22]
+        },
+        {
+            "name": "Urban Camping & Gunshop",
+            "start": [3784, 8490, 12, 28],
+            "stop": [3821, 8579, 12, 28]
+        },
+        {
+            "name": "Army supply & gas station",
+            "start": [5390, 9416, 18, 31],
+            "stop": [5672, 9895, 18, 32]
+        },
+        {
             "name":     "Ekron",
             "start":    [7055, 8142, 23, 27],
             "stop":     [7526, 8582, 25, 28]
