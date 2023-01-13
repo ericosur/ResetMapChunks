@@ -12,3 +12,16 @@ def distp(p1, p2):
     ''' dist two points '''
     d = math.sqrt((p1[0]-p2[0])**2 + (p1[1]-p2[1])**2)
     return d
+
+def url(x1, y1):
+    ''' compose url '''
+    return f'https://map.projectzomboid.com/#{x1}x{y1}'
+
+def urlp(p, ratio=200):
+    ''' compose p '''
+    r = ''
+    if ratio == 0 or ratio > 2400:
+        r = f'https://map.projectzomboid.com/#{p[0]}x{p[1]}x200'
+    else:
+        r = f'https://map.projectzomboid.com/#{p[0]}x{p[1]}x{ratio}'
+    return r

@@ -15,20 +15,32 @@ class SearchNearby():
         self.range = drange
         self.x = x
         self.y = y
+        self.results = {}
+        self.ratio = [6*self.range, 6*self.range, 4*self.range, 3*self.range, 0]
+
+    def show_results(self):
+        ''' show results '''
+        for k in sorted(self.results.keys()):
+            p = self.results[k]
+            r = float(k) / float(self.range) * len(self.ratio)
+            r = int(r)
+            print(k, p, dist.urlp(p, ratio=self.ratio[r]))
 
     def find_nearby_vehicles(self):
         ''' find nearby vehicles '''
         print(f'find_nearby_vehicles at {self.x},{self.y}, in range: {self.range}:')
         print('dist,', '(x,y),', 'url')
+        self.results = {}
         for v in _VEHICLES:
             d = dist.dist(self.x, self.y, v[0], v[1])
+            d = int(d)
             if d < self.range:
-                url = f'https://map.projectzomboid.com/#{v[0]}x{v[1]}'
-                print(f'"{d:.3f}","{v}","{url}"')
+                self.results[d] = v
 
     def run(self):
         ''' run '''
         self.find_nearby_vehicles()
+        self.show_results()
 
 def main():
     ''' main '''
