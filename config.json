@@ -1,7 +1,7 @@
 {
-    "path":             "/home/rasmus/Downloads/zomboid/save2/20221126-survivor",
+    "path":             "/mnt/c/Users/USER/Zomboid/Saves/Survivor/20221126-survivor",
     "logs": {
         "save":         true,
-        "path":         "/home/rasmus/Downloads/zomboid/reset.log"
+        "path":         "/mnt/c/Users/USER/Zomboid/Saves/Survivor/mapreset.log"
     }
 }

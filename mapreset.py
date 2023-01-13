@@ -142,7 +142,7 @@ def main(user_config, region_config):
     """
     # Load Configuration settings
     config = load_configuration(user_config)
-    regions = load_configuration(region_config)
+    areas = load_configuration(region_config)
 
     # Setup Logfile settings
     log = logs.NewLog(65, config['logs']['save'], config['logs']['path'])
@@ -152,7 +152,7 @@ def main(user_config, region_config):
     counter = 0
     print("Which region would you like to reset?")
     print("")
-    for region in regions['regions']:
+    for region in areas['regions']:
         print(f"  {counter}\t{region['name']}")
         counter += 1
     print("")
@@ -169,28 +169,28 @@ def main(user_config, region_config):
 
     # Display some meta information about your selection
     log.timestamp()
-    log.add_header(f"{regions['regions'][selection]['name']}")
+    log.add_header(f"{areas['regions'][selection]['name']}")
     log.add(f"> Region: {selection}")
-    log.add(f"> Start:  {regions['regions'][selection]['start'][0]} x "
-            f"{regions['regions'][selection]['start'][1]} "
-            f" Chunk ({config['regions'][selection]['start'][2]} x "
-            f"{regions['regions'][selection]['start'][3]})")
-    log.add(f"> Stop:   {config['regions'][selection]['stop'][0]} x "
-            f"{regions['regions'][selection]['stop'][1]} "
-            f" Chunk ({config['regions'][selection]['stop'][2]} x "
-            f"{regions['regions'][selection]['stop'][3]})")
+    log.add(f"> Start:  {areas['regions'][selection]['start'][0]} x "
+            f"{areas['regions'][selection]['start'][1]} "
+            f" Chunk ({areas['regions'][selection]['start'][2]} x "
+            f"{areas['regions'][selection]['start'][3]})")
+    log.add(f"> Stop:   {areas['regions'][selection]['stop'][0]} x "
+            f"{areas['regions'][selection]['stop'][1]} "
+            f" Chunk ({areas['regions'][selection]['stop'][2]} x "
+            f"{areas['regions'][selection]['stop'][3]})")
     log.add_header("Reset Log")
 
     # Reset the selected boundaries
     resetmap(log, config['path'],
-             regions['regions'][selection]['start'][0],
-             regions['regions'][selection]['start'][1],
-             regions['regions'][selection]['start'][2],
-             regions['regions'][selection]['start'][3],
-             regions['regions'][selection]['stop'][0],
-             regions['regions'][selection]['stop'][1],
-             regions['regions'][selection]['stop'][2],
-             regions['regions'][selection]['stop'][3])
+             areas['regions'][selection]['start'][0],
+             areas['regions'][selection]['start'][1],
+             areas['regions'][selection]['start'][2],
+             areas['regions'][selection]['start'][3],
+             areas['regions'][selection]['stop'][0],
+             areas['regions'][selection]['stop'][1],
+             areas['regions'][selection]['stop'][2],
+             areas['regions'][selection]['stop'][3])
 
     # Done
     log.timestamp()
