@@ -27,7 +27,7 @@ from common import logs
 # CONFIGURATION --------------------------------------------------------
 # ----------------------------------------------------------------------
 GLOBAL_CONFIG = join(path_split(abspath(__file__))[0], "config.json")
-
+REGION_CONFIG = join(path_split(abspath(__file__))[0], "region.json")
 
 # ----------------------------------------------------------------------
 # FUNCTIONS ------------------------------------------------------------
@@ -134,7 +134,7 @@ def resetmap(log, path,
 # ----------------------------------------------------------------------
 # MAIN -----------------------------------------------------------------
 # ----------------------------------------------------------------------
-def main(user_config):
+def main(user_config, region_config):
     """Main application routine
 
     Args:
@@ -142,6 +142,7 @@ def main(user_config):
     """
     # Load Configuration settings
     config = load_configuration(user_config)
+    regions = load_configuration(region_config)
 
     # Setup Logfile settings
     log = logs.NewLog(65, config['logs']['save'], config['logs']['path'])
@@ -151,7 +152,7 @@ def main(user_config):
     counter = 0
     print("Which region would you like to reset?")
     print("")
-    for region in config['regions']:
+    for region in regions['regions']:
         print(f"  {counter}\t{region['name']}")
         counter += 1
     print("")
@@ -168,28 +169,28 @@ def main(user_config):
 
     # Display some meta information about your selection
     log.timestamp()
-    log.add_header(f"{config['regions'][selection]['name']}")
+    log.add_header(f"{regions['regions'][selection]['name']}")
     log.add(f"> Region: {selection}")
-    log.add(f"> Start:  {config['regions'][selection]['start'][0]} x "
-            f"{config['regions'][selection]['start'][1]} "
+    log.add(f"> Start:  {regions['regions'][selection]['start'][0]} x "
+            f"{regions['regions'][selection]['start'][1]} "
             f" Chunk ({config['regions'][selection]['start'][2]} x "
-            f"{config['regions'][selection]['start'][3]})")
+            f"{regions['regions'][selection]['start'][3]})")
     log.add(f"> Stop:   {config['regions'][selection]['stop'][0]} x "
-            f"{config['regions'][selection]['stop'][1]} "
+            f"{regions['regions'][selection]['stop'][1]} "
             f" Chunk ({config['regions'][selection]['stop'][2]} x "
-            f"{config['regions'][selection]['stop'][3]})")
+            f"{regions['regions'][selection]['stop'][3]})")
     log.add_header("Reset Log")
 
     # Reset the selected boundaries
     resetmap(log, config['path'],
-             config['regions'][selection]['start'][0],
-             config['regions'][selection]['start'][1],
-             config['regions'][selection]['start'][2],
-             config['regions'][selection]['start'][3],
-             config['regions'][selection]['stop'][0],
-             config['regions'][selection]['stop'][1],
-             config['regions'][selection]['stop'][2],
-             config['regions'][selection]['stop'][3])
+             regions['regions'][selection]['start'][0],
+             regions['regions'][selection]['start'][1],
+             regions['regions'][selection]['start'][2],
+             regions['regions'][selection]['start'][3],
+             regions['regions'][selection]['stop'][0],
+             regions['regions'][selection]['stop'][1],
+             regions['regions'][selection]['stop'][2],
+             regions['regions'][selection]['stop'][3])
 
     # Done
     log.timestamp()
@@ -199,4 +200,4 @@ def main(user_config):
 # ROUTINE --------------------------------------------------------------
 # ----------------------------------------------------------------------
 if __name__ == "__main__":
-    main(GLOBAL_CONFIG)
+    main(GLOBAL_CONFIG, REGION_CONFIG)
