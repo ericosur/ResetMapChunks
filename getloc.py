@@ -14,7 +14,7 @@ from common import dist
 
 SQLX = "cast(round(x) as int) as x"
 SQLY = "cast(round(y) as int) as y"
-RANGE = 180
+RANGE = 80
 
 class Solution():
     ''' sqlite and query '''
@@ -23,14 +23,20 @@ class Solution():
         # get save dir from config.json
         self.jsondata = myutil.read_jsonfile('config.json')
         # full path to players.db
-        self.playerdb = self.jsondata.get('path') + '/' + 'players.db'
+        self.playerdb = self.get_path() + '/' + 'players.db'
         # full path to vehicles.db
-        self.vehicledb = self.jsondata.get('path') + '/' + 'vehicles.db'
+        self.vehicledb = self.get_path() + '/' + 'vehicles.db'
         self.vehicletxt = '_vehicle.py'
         self.playerx = 0
         self.playery = 0
         self.vehicles = []
 
+    def get_path(self):
+        ''' get path '''
+        if myutil.is_cygwin():
+            return self.jsondata.get('cygwin_path')
+        else:
+            return self.jsondata.get('path')
 
     def query_xy(self):
         ''' query x, y location '''

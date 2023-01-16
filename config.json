@@ -1,5 +1,6 @@
 {
     "path":             "/mnt/c/Users/USER/Zomboid/Saves/Survivor/20221126-survivor",
+    "cygwin_path": "/cygdrive/c/Users/USER/Zomboid/Saves/Survivor/20221126-survivor",
     "logs": {
         "save":         true,
         "path":         "/mnt/c/Users/USER/Zomboid/Saves/Survivor/mapreset.log"
