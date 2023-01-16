@@ -131,7 +131,18 @@ def get_hostname():
 
 def is_cygwin():
     ''' check if cygwin '''
-    return "CYGWIN" in platform.system()
+    system_name = platform.system().lower()
+    return "cygwin" in system_name
+
+def is_linux():
+    ''' check if linux '''
+    system_name = platform.system().lower()
+    return "linux" in system_name
+
+def is_windows():
+    ''' check if windows '''
+    system_name = platform.system().lower()
+    return "windows" in system_name
 
 def query_url_for_data(url):
     ''' query url and return data

@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # coding: utf-8
 
+import os
 from common import dist
 import myutil
 
@@ -18,8 +19,15 @@ def main():
     ''' main '''
     if myutil.is_cygwin():
         print("cygwin")
+    elif myutil.is_linux():
+        print("linux")
+    elif myutil.is_windows():
+        print("windows")
     else:
-        print("not cygwin")
+        print("I donno...")
+
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    print(dir_path)
 
 if __name__ == '__main__':
     main()

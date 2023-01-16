@@ -8,6 +8,7 @@ query players.db to find location coordinates
 import sqlite3
 import sys
 import math
+import os
 import myutil
 from common import dist
 
@@ -23,20 +24,31 @@ class Solution():
         # get save dir from config.json
         self.jsondata = myutil.read_jsonfile('config.json')
         # full path to players.db
-        self.playerdb = self.get_path() + '/' + 'players.db'
+        self.playerdb = os.path.join(self.get_path(), 'players.db')
+        self.check_path(self.playerdb)
         # full path to vehicles.db
-        self.vehicledb = self.get_path() + '/' + 'vehicles.db'
+        self.vehicledb = os.path.join(self.get_path(), 'vehicles.db')
+        self.check_path(self.vehicledb)
         self.vehicletxt = '_vehicle.py'
         self.playerx = 0
         self.playery = 0
         self.vehicles = []
 
+    @staticmethod
+    def check_path(fn):
+        ''' check path '''
+        if not myutil.isfile(fn):
+            print("file not found: ", fn)
+            sys.exit(1)
+
     def get_path(self):
-        ''' get path '''
+        ''' get path by platform'''
+        if myutil.is_linux():
+            return self.jsondata.get('path')
         if myutil.is_cygwin():
             return self.jsondata.get('cygwin_path')
-        else:
-            return self.jsondata.get('path')
+        if myutil.is_windows():
+            return self.jsondata.get('window_path')
 
     def query_xy(self):
         ''' query x, y location '''
@@ -47,7 +59,8 @@ class Solution():
         self.playerx = x
         self.playery = y
         print(f'player name: {name} at location: {x}x{y}')
-        print(f'refer to online map: https://map.projectzomboid.com/#{x}x{y}')
+        url = dist.url(x, y)
+        print(f'refer to online map: {url}')
 
     def dump_vehicles(self):
         ''' query all location of vehicles '''
@@ -71,7 +84,7 @@ class Solution():
 
     def find_nearby_vehicles(self):
         ''' find nearby vehicles '''
-        print('find_nearby_vehicles:')
+        print(f'find_nearby_vehicles (range={RANGE}):')
         print('dist', 'x,y', 'url')
         for v in self.vehicles:
             d = dist.dist(self.playerx, self.playery, v[0], v[1])
