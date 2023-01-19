@@ -3,6 +3,8 @@
 
 import math
 
+_MAP_URL = 'https://map.projectzomboid.com/'
+
 def dist(x1, y1, x2, y2):
     ''' dist '''
     d = math.sqrt((x1-x2)**2 + (y1-y2)**2)
@@ -15,13 +17,13 @@ def distp(p1, p2):
 
 def url(x1, y1):
     ''' compose url '''
-    return f'https://map.projectzomboid.com/#{x1}x{y1}'
+    return f'{_MAP_URL}#{x1}x{y1}'
 
 def urlp(p, ratio=200):
     ''' compose p '''
     r = ''
     if ratio == 0 or ratio > 2400:
-        r = f'https://map.projectzomboid.com/#{p[0]}x{p[1]}x200'
+        r = f'{_MAP_URL}#{p[0]}x{p[1]}x200'
     else:
-        r = f'https://map.projectzomboid.com/#{p[0]}x{p[1]}x{ratio}'
+        r = f'{_MAP_URL}#{p[0]}x{p[1]}x{ratio}'
     return r
